@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+
+        form{
+            border: 2px solid grey;
+            background-color: azure;
+            padding: 10px;
+            margin: 30px;
+        }
+
+        p {
+            font-size: 15pt;
+            font-weight: bold;
+            color: blue;
+            font-family: "david";
+        }
+        input{
+            background-color: cornflowerblue;
+            border-color: #225599;
+        }
+        input[type=text]:focus{
+            background-color: aliceblue;
+            border-color: antiquewhite;
+            box-shadow:none;
+        }
+        div{
+            color: red;
+            font-size: 10pt;
+            display: none;
+        }
+    </style>
+
+    <script>
+
+        function validation() {
+
+            var a=true;
+
+
+            for (var i = 1; i < 7; i++) {
+                var myElements = document.getElementById(i);
+                var myElementDiv=document.getElementById(i+6);
+                if (myElements.value == "" || myElements.value == null) {
+                    myElements.style.backgroundColor = "red";
+                    myElements.style.borderColor = "red";
+                    myElements.style.boxShadow = "5px 5px 5px grey";
+                    myElementDiv.style.display = "block";
+                    a=false;
+                }
+                else {
+                    myElements.style.backgroundColor = "cornflowerblue";
+                    myElements.style.borderColor = " #225599";
+                    myElements.style.boxShadow = "none";
+                    myElementDiv.style.display = "none";
+                    a=true;
+                }
+
+            }
+
+            //for (var i = 7; i < 13; i++) {
+               // var myElements = document.getElementById(i);
+                //if (myElements.value == "" || myElements.value == null) {
+                   // myElements.style.display = "block";
+              //  }
+               // else {
+                //    myElements.style.display = "none";
+               // }
+           // }
+
+
+
+            var pass1= document.forms["myForm"]["pass1"].value;
+            var pass2= document.forms["myForm"]["pass2"].value;
+
+            if(pass2!=pass1){
+                alert("Passwords do not match");
+                a= false;
+            }
+
+            if (a==false){
+                return false;
+            }
+            else {
+                document.getElementById('time').value = Date();
+                console.log(document.getElementById('time').value);
+                alert("Thank You!");
+                return true;
+            }
+
+            //  var time= document.getElementById('time').value = new Date().toLocaleDateString();
+            //  alert("Thank you!")
+
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+<form name="myForm" id="valid" onsubmit="return validation()" method="post">
+
+    <h1>please enter the following</h1><br>
+
+    <p>First name: <input type="text" id="1" name="firstname"><div id="7">*First name is missing</div></p>
+    <p>Last name: <input type="text" id="2" name="lastname"><div id="8">*Last name is missing</div></p>
+    <p>Birth Date: <input type="text" id="3" name="birthdate"><div id="9">*Birth Date is missing</div></p>
+    <p>Email: <input type="text" id="4" name="email"><div id="10">*Email is missing</div></p>
+    <p>Password: <input type="password" id="5" name="pass1" size="5" maxlength="5"><div id="11">*Password is missing</div></p>
+    <p>Repeat Password: <input type="password" id="6" name="pass2" size="5" maxlength="5"><div id="12">*Please repeat the password</div></p>
+    <p>Gender:</p>
+    <input type="radio" name="gender" value="male" checked> Male
+    <input type="radio" name="gender" value="female"> Female<br>
+    <p> Interests:</p>
+    <input type=checkbox value="פנאי" name=less>פנאי
+    <input type=checkbox value="לימודי" name=less >לימודי
+    <input type=checkbox value="ספורט" name=less>ספורט
+    <input type=checkbox value="אופנה" name=less >אופנה
+    <input type=checkbox value="ילדים" name=less>ילדים<br>
+    <input type="hidden" id="time" value=" " ><br>
+    <input type="submit" value="Submit" >
+</form>
+</body>
+</html>
