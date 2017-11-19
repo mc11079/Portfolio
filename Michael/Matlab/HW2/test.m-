@@ -1,0 +1,22 @@
+v=[-100 -200 3];
+s= sigmoid(v);
+
+%1.	Hypothesis =[0.0, 0.0,?, 0.0], cost_J=infinity,  iter=1, Costs = [ ] , Errors1=[], Errors2=[]
+Hypothesis=[-5 0 1];
+Hypothesis=[-5 0 1];
+
+%2.	Load data from filename into Data Matrix D, and label to matrix Y
+%[D,Y]=loadData('classEx.txt');
+[D,Y]=loadData('ex2data1.txt');
+%3.	Add left column of ones to Matrix D
+ones=addOnesColumn(D);
+p=predictValue(ones,Hypothesis);
+%4.	do {
+%5.	   Compute Cost and Gradient, and append Cost to Costs
+[costs,gradient]=computeCostAndGradient(ones,Y,Hypothesis);
+%6.	   Count Errors
+%7.	   Update Hypothesis using Gradient and alpha
+%8.	   iter=iter+1
+%9.	} while  (cost still improves   AND   iter<max_iter )
+%10.	FinalHypothesis = Hypothesis; 
+%plot ErrorCounts; displayDecisionBoundary

@@ -1,0 +1,42 @@
+
+function [FinalHypothesis, Costs] = gradientDescent(filename, alpha, max_iter, threshold)
+    function gradientDescent(Data, Y, Hypothesis, alpha, initial_cost, max_iter, threshold)
+
+%Initialize:
+[D,Y]=loadData(filename);
+D=normalizePrices(D);
+D=addOnesColumn(D);
+Hypothesis=zeros(1,size(D,2));
+iter=1;
+flag=true;
+Costs=zeros(1,max_iter);
+
+
+while(flag)
+%calculate error terms: Error_i for each Data row  Data_i and label Y_i  (part 4)
+compError=computeErrors(D,Y,Hypothesis);
+%Compute cost using error terms (part 5)
+compCost=computeCost(D,Y,Hypothesis);
+%Append cost to Costs array
+Costs(iter)=compCost;
+%Compute Gradient for each feature using Error_i and Data_i (part 6)
+compGradient=computeGradient(D,compError);
+%Update Hypothesis using Gradient and alpha (part 7)
+newHypothesis=updateHypothsis(Hypothesis,alpha,compGradient);
+Hypothesis=newHypothesis;
+iter=iter+1;
+if(iter > 2 && ((Costs(iter-2)-Costs(iter-1))<=threshold))
+    flag=false;
+    formatSpec = 'Gradient descent terminating after %d iterations. Improvement was :  %d   below threshold (%5.3f)';
+    fprintf(formatSpec,iter-1,Costs(iter-1)-Costs(iter),threshold);
+end
+
+if(iter+1 > max_iter )
+    flag=false;
+    formatSpec = 'Gradient descent terminating after %d iterations (max_iter)';
+    fprintf(formatSpec,max_iter);
+end
+end
+FinalHypothesis=updateHypothsis(Hypothesis,alpha,compGradient);
+end
+
